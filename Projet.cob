@@ -47,8 +47,32 @@
            77 fdvd_stat PIC 9(2).
            77 fclt_stat PIC 9(2).
 
+           77 Wrep PIC 9.
+
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
             DISPLAY "Hello world"
             STOP RUN.
+
+       AJOUT_DVD.
+       PERFORM WITH TEST AFTER UNTIL Wrep = 0
+           DISPLAY "Donnez les informations du DVD : "
+           DISPLAY "Donnez l'identifiant : "
+           ACCEPT fdvd_id
+           DISPLAY "Donnez le nom : "
+           ACCEPT fdvd_titre
+           DISPLAY "Donnez le réalisateur : "
+           ACCEPT fdvd_real
+           DISPLAY "Donnez le genre : "
+           ACCEPT fdvd_genre
+           DISPLAY "par défaut la disponibilité est 1, louable"
+           MOVE 1 TO fdvd_louable
+           DISPLAY "Donnez le prix : "
+           ACCEPT fdvd_prix
+           WRITE dvdTampon END-WRITE
+           PERFORM WITH TEST AFTER UNTIL Wrep = 0 OR Wrep = 1
+               DISPLAY "Souhaitez vous continuer? Oui= 1 ou Non = 0"
+               ACCEPT Wrep
+           END-PERFORM
+       END-PERFORM.
        END PROGRAM Projet.
